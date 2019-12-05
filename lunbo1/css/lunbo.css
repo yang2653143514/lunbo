@@ -1,0 +1,48 @@
+*{
+	padding:0;
+	margin:0;
+	box-sizing:border-box;
+}
+#main{
+	width:610px;
+	height:410px;
+	position: relative;
+	border:5px solid gray;
+	margin:50px auto;
+	overflow: hidden;
+}
+#img-list{
+	position: absolute;
+	left:0px;
+}
+#img-list li{
+	float:left;
+	list-style: none;
+}
+#main ul li img{
+	width:600px;
+	height:400px;
+}
+#main ul li p{
+	text-align: center;
+	letter-spacing:15px;
+	user-select: none;
+	color:yellow;
+	width:600px;
+	height:30px;
+	position: absolute;
+	bottom:0;
+	background: rgba(255,255,255,0.2);
+}
+#nav-btns{
+	position: absolute;
+	bottom:35px;
+}
+#nav-btns a{
+	float:left;
+	width:20px;
+	height:20px;
+	border-radius:100%;
+	background-color: rgba(255,0,0,0.5);
+	margin: 0 5px;
+}
