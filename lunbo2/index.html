@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>旋转木马效果</title>
+	<style type="text/css">
+		*{
+			padding:0;
+			margin:0;
+			box-sizing:border-box;
+			transition: transform 1s;
+		}
+		.main{
+			margin:200px auto;
+			width:800px;
+			height:400px;
+			transform-style: preserve-3d;
+			background: #eee;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		#stage{
+			width:600px;
+			height:200px;
+			position: relative;
+			perspective: 1000px;
+			backface-visibility:hidden;
+		}
+		
+		#stage img{
+			position: absolute;
+			top:0;
+			left:0;
+			right:0;
+			bottom: 0;
+			margin:auto;
+			width:200px;
+			height:150px;
+		}
+		img:nth-child(1) { transform: rotateY(   0deg ) translateZ(300px);z-index: 2}
+		img:nth-child(2) { transform: rotateY(  40deg ) translateZ(300px);z-index: 1}
+		img:nth-child(3) { transform: rotateY(  80deg ) translateZ(300px);z-index: 0}
+		img:nth-child(4) { transform: rotateY( 120deg ) translateZ(300px);z-index: -1}
+		img:nth-child(5) { transform: rotateY( 160deg ) translateZ(300px);z-index: -2}
+		img:nth-child(6) { transform: rotateY( 200deg ) translateZ(300px);z-index: -2}
+		img:nth-child(7) { transform: rotateY( 240deg ) translateZ(300px);z-index: -1}
+		img:nth-child(8) { transform: rotateY( 280deg ) translateZ(300px);z-index: 0}
+		img:nth-child(9) { transform: rotateY( 320deg ) translateZ(300px);z-index: 1}
+	</style>
+</head>
+<body>
+	<div class="main">
+		<div id="stage">
+			<img src="../images/1.jpg" />
+			<img src="../images/2.jpg" />
+			<img src="../images/3.jpg" />
+			<img src="../images/4.jpg" />
+			<img src="../images/5.jpg" />
+			<img src="../images/6.jpg" />
+			<img src="../images/7.jpg" />
+			<img src="../images/8.jpg" />
+			<img src="../images/9.jpg" />
+		</div>
+	</div>
+	<script type="text/javascript">
+		var imgAll = document.querySelectorAll('img');
+		var stage = document.getElementById('stage');
+		var index = 0;
+
+		stage.addEventListener('click',function(){
+			++index;
+			var i = 0;
+			for(let [key,value] of imgAll.entries()){
+				//console.log(i + ':');
+				var judg = index % 9;
+				if(judg < 5){
+					if(judg-1 < i && i < judg + 4){
+						value.style.zIndex = Number(window.getComputedStyle(value).zIndex) + 1;
+					} else if(i != judg + 4){
+						value.style.zIndex = Number(window.getComputedStyle(value).zIndex) - 1;
+					} else{
+						value.style.zIndex = Number(window.getComputedStyle(value).zIndex);
+					}
+				} else{
+					if(judg-1 < i || i < (judg + 4) % 9){
+						value.style.zIndex = Number(window.getComputedStyle(value).zIndex) + 1;
+					} else if(i != (judg + 4) % 9){
+						value.style.zIndex = Number(window.getComputedStyle(value).zIndex) - 1;
+					} else{
+						value.style.zIndex = Number(window.getComputedStyle(value).zIndex);
+					}
+				}
+				console.log(value.style.zIndex);
+				i++;
+				value.style.transform = 'rotateY(' + (key*40-40*index) + 'deg) translateZ(' + 300 +'px)';
+			}
+		})
+	</script>
+</body>
+</html>
