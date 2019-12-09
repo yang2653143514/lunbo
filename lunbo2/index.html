@@ -67,32 +67,32 @@
 		var imgAll = document.querySelectorAll('img');
 		var stage = document.getElementById('stage');
 		var index = 0;
+		var arrZindex = [2,1,0,-1,-2,-2,-1,0,1];
 
 		stage.addEventListener('click',function(){
 			++index;
 			var i = 0;
 			for(let [key,value] of imgAll.entries()){
-				//console.log(i + ':');
-				var judg = index % 9;
-				if(judg < 5){
-					if(judg-1 < i && i < judg + 4){
-						value.style.zIndex = Number(window.getComputedStyle(value).zIndex) + 1;
-					} else if(i != judg + 4){
-						value.style.zIndex = Number(window.getComputedStyle(value).zIndex) - 1;
-					} else{
-						value.style.zIndex = Number(window.getComputedStyle(value).zIndex);
-					}
-				} else{
-					if(judg-1 < i || i < (judg + 4) % 9){
-						value.style.zIndex = Number(window.getComputedStyle(value).zIndex) + 1;
-					} else if(i != (judg + 4) % 9){
-						value.style.zIndex = Number(window.getComputedStyle(value).zIndex) - 1;
-					} else{
-						value.style.zIndex = Number(window.getComputedStyle(value).zIndex);
-					}
-				}
-				console.log(value.style.zIndex);
-				i++;
+				var i = Math.abs(key - index) % 9;
+				value.style.zIndex = arrZindex[i]; //利用数组下标比较简单的计算z-index方法
+				// if(judg < 5){  //比较傻瓜的一种计算z-index方法
+				// 	if(judg-1 < i && i < judg + 4){
+				// 		value.style.zIndex = Number(window.getComputedStyle(value).zIndex) + 1;
+				// 	} else if(i != judg + 4){
+				// 		value.style.zIndex = Number(window.getComputedStyle(value).zIndex) - 1;
+				// 	} else{
+				// 		value.style.zIndex = Number(window.getComputedStyle(value).zIndex);
+				// 	}
+				// } else{
+				// 	if(judg-1 < i || i < (judg + 4) % 9){
+				// 		value.style.zIndex = Number(window.getComputedStyle(value).zIndex) + 1;
+				// 	} else if(i != (judg + 4) % 9){
+				// 		value.style.zIndex = Number(window.getComputedStyle(value).zIndex) - 1;
+				// 	} else{
+				// 		value.style.zIndex = Number(window.getComputedStyle(value).zIndex);
+				// 	}
+				// }
+				// i++;
 				value.style.transform = 'rotateY(' + (key*40-40*index) + 'deg) translateZ(' + 300 +'px)';
 			}
 		})
