@@ -70,6 +70,8 @@
 		var arrZindex = [2,1,0,-1,-2,-2,-1,0,1];
 
 		stage.addEventListener('click',function(){
+			stage.style.pointerEvents = "none";
+			//console.log(window.getComputedStyle(stage, null).getPropertyValue("pointer-events"));
 			++index;
 			var i = 0;
 			for(let [key,value] of imgAll.entries()){
@@ -95,6 +97,9 @@
 				// i++;
 				value.style.transform = 'rotateY(' + (key*40-40*index) + 'deg) translateZ(' + 300 +'px)';
 			}
+			setTimeout(function(){//在点击的0.3s后可以再次点击
+				stage.style.pointerEvents = "auto";
+			},300)
 		})
 	</script>
 </body>
